@@ -1,4 +1,5 @@
-import _ from "lodash";
+import { mixin, toNumber } from "lodash";
+import { compose } from "ramda";
 
 // The approach we're using here is called module augmentation. Find details here: https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation
 // We're extending interfaces in existing modules by redefining them and adding extra methods.
@@ -26,15 +27,13 @@ const sanitize = (value: string) => String(value).replace(/[^0-9.-]/g, "");
 
 const preventNaN = (value: number) => (Number.isNaN(value) ? 0 : value);
 
-const calculateMinimum = (value: number, min?: number) =>
-  _.isUndefined(min) ? value : Math.max(value, min);
+const calculateMinimum = Math.max;
 
-const calculateMaximum = (value: number, max?: number) =>
-  _.isUndefined(max) ? value : Math.min(value, max);
+const calculateMaximum = Math.min;
 
-const toSafeNumber = (value: string) => preventNaN(_.toNumber(value));
+const toSafeNumber = compose(preventNaN, toNumber);
 
-_.mixin({
+mixin({
   sanitize,
   preventNaN,
   calculateMinimum,
