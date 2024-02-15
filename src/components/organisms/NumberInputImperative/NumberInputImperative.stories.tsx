@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { NumberInput } from "./NumberInputImperative";
+import { NumberInputImperative } from "./NumberInputImperative";
 
-const meta: Meta<typeof NumberInput> = {
-  component: NumberInput,
+const meta: Meta<typeof NumberInputImperative> = {
+  component: NumberInputImperative,
   title: "Organisms/Number Input",
 };
 
-type Story = StoryObj<typeof NumberInput>;
+type Story = StoryObj<typeof NumberInputImperative>;
 
 export default meta;
 

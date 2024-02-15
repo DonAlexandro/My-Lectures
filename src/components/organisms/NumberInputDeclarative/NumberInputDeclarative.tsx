@@ -1,6 +1,8 @@
 import { Add, Remove } from "@mui/icons-material";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { chain, sanitize } from "lodash";
 import { useState } from "react";
+import "./presenter";
 
 type NumberInputImperativeProps = {
   max?: number;
@@ -9,7 +11,11 @@ type NumberInputImperativeProps = {
   step?: number;
 };
 
-export const NumberInputImperative = ({
+type OnChangeEventType = React.ChangeEvent<
+  HTMLTextAreaElement | HTMLInputElement
+>;
+
+export const NumberInputDeclarative = ({
   max,
   min,
   period = 0,
@@ -19,40 +25,30 @@ export const NumberInputImperative = ({
 
   const onChange = (value: string) => setNumber(value);
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    // Allow entering only digits, dot and minus
-    const value = event.target.value.replace(/[^0-9.-]/g, "");
+  const handleChange = (event: OnChangeEventType) =>
+    onChange(sanitize(event.target.value));
 
-    onChange(value);
-  };
+  const handleAdd = () =>
+    onChange(
+      chain(number)
+        .sanitize()
+        .toSafeNumber()
+        .add(step)
+        .calculateMaximum(max)
+        .value()
+        .toFixed(period)
+    );
 
-  const handleAdd = () => {
-    const numbered = +number;
-    const value = +(numbered + step).toFixed(period);
-
-    if (Number.isNaN(value)) {
-      return onChange(String(0));
-    }
-
-    if (max === undefined) {
-      return onChange(String(value));
-    }
-
-    onChange(value > max ? String(max) : String(value));
-  };
-
-  const handleSub = () => {
-    const numbered = +number;
-    const value = +(numbered - step).toFixed(period);
-
-    if (min === undefined) {
-      return onChange(String(value));
-    }
-
-    onChange(value < min ? String(min) : String(value));
-  };
+  const handleSub = () =>
+    onChange(
+      chain(number)
+        .sanitize()
+        .toSafeNumber()
+        .subtract(step)
+        .calculateMinimum(min)
+        .value()
+        .toFixed(period)
+    );
 
   return (
     <TextField
