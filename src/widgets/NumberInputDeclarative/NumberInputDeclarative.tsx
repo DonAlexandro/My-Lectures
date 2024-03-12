@@ -4,7 +4,7 @@ import { chain, sanitize } from "lodash";
 import { useState } from "react";
 import "./presenter";
 
-type NumberInputImperativeProps = {
+type NumberInputProps = {
   max?: number;
   min?: number;
   period?: number;
@@ -20,7 +20,7 @@ export const NumberInputDeclarative = ({
   min,
   period = 0,
   step = 1,
-}: NumberInputImperativeProps) => {
+}: NumberInputProps) => {
   const [number, setNumber] = useState("0");
 
   const onChange = (value: string) => setNumber(value);
