@@ -3,7 +3,7 @@ import { NumberInputDeclarative } from "./NumberInputDeclarative";
 
 const meta: Meta<typeof NumberInputDeclarative> = {
   component: NumberInputDeclarative,
-  title: "Organisms/Number Input Declarative",
+  title: "Widgets/Number Input Declarative",
 };
 
 type Story = StoryObj<typeof NumberInputDeclarative>;

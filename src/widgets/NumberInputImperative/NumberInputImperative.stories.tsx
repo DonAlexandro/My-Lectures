@@ -3,7 +3,7 @@ import { NumberInputImperative } from "./NumberInputImperative";
 
 const meta: Meta<typeof NumberInputImperative> = {
   component: NumberInputImperative,
-  title: "Organisms/Number Input",
+  title: "Widgets/Number Input",
 };
 
 type Story = StoryObj<typeof NumberInputImperative>;

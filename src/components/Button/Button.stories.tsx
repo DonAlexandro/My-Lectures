@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: "Molecules/Button",
+  title: "Components/Button",
 };
 
 type Story = StoryObj<typeof Button>;

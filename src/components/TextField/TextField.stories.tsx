@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof TextField> = {
   component: TextField,
-  title: "Molecules/Text Field",
+  title: "Components/Text Field",
 };
 
 type Story = StoryObj<typeof TextField>;
